@@ -223,10 +223,10 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
         if (annotateTop == FALSE) {
           if (logp) {
               with(subset(d, P <= annotatePval), 
-                   textxy(pos, -log10(P), offset = 0.8, labs = topHits$SNP, cex = 0.65), ...)
+                   textxy(pos, -log10(P), offset = 0.7, labs = topHits$SNP, cex = 0.8), ...)
           } else
               with(subset(d, P >= annotatePval), 
-                   textxy(pos, P, offset = 0.8, labs = topHits$SNP, cex = 0.65), ...)
+                   textxy(pos, P, offset = 0.7, labs = topHits$SNP, cex = 0.8), ...)
         }
         else {
             # could try alternative, annotate top SNP of each sig chr
