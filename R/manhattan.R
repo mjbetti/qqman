@@ -240,9 +240,9 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
                 
             }
             if (logp ){
-                textxy(topSNPs$pos, -log10(topSNPs$P), offset = 0.625, labs = topSNPs$SNP, cex = 0.5, ...)
+                textxy(topSNPs$pos, -log10(topSNPs$P), offset = 0.7, labs = topSNPs$SNP, cex = 0.8, ...)
             } else
-              textxy(topSNPs$pos, topSNPs$P, offset = 0.625, labs = topSNPs$SNP, cex = 0.5, ...)
+              textxy(topSNPs$pos, topSNPs$P, offset = 0.7, labs = topSNPs$SNP, cex = 0.8, ...)
         }
     }  
     par(xpd = FALSE)
