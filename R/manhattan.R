@@ -213,37 +213,39 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
     
     # Highlight top SNPs
     if (!is.null(annotatePval)) {
-        # extract top SNPs at given p-val
+    # extract top SNPs at given p-val
         if (logp) {
             topHits = subset(d, P <= annotatePval)
-        } else
+        } else {
             topHits = subset(d, P >= annotatePval)
+        }
         par(xpd = TRUE)
+    
+        # Now, for each unique locus in topHits, select the most significant SNP
+        topHits <- topHits[order(topHits$P), ]
+        topHits <- topHits[!duplicated(topHits$SNP), ]
+
         # annotate these SNPs
         if (annotateTop == FALSE) {
-          if (logp) {
-              with(subset(d, P <= annotatePval), 
-                   textxy(pos, -log10(P), offset = 0.7, labs = topHits$SNP, cex = 0.8), ...)
-          } else
-              with(subset(d, P >= annotatePval), 
-                   textxy(pos, P, offset = 0.7, labs = topHits$SNP, cex = 0.8), ...)
+            if (logp) {
+                with(topHits, textxy(pos, -log10(P), offset = 0.7, labs = SNP, cex = 0.8, ...))
+            } else {
+                with(topHits, textxy(pos, P, offset = 0.7, labs = SNP, cex = 0.8, ...))
+            }
         }
         else {
-            # could try alternative, annotate top SNP of each sig chr
-            topHits <- topHits[order(topHits$P),]
+            # annotate top SNP of each sig chr
             topSNPs <- NULL
-            
             for (i in unique(topHits$CHR)) {
-                
                 chrSNPs <- topHits[topHits$CHR == i,]
                 topSNPs <- rbind(topSNPs, chrSNPs[1,])
-                
             }
-            if (logp ){
+            if (logp) {
                 textxy(topSNPs$pos, -log10(topSNPs$P), offset = 0.7, labs = topSNPs$SNP, cex = 0.8, ...)
-            } else
-              textxy(topSNPs$pos, topSNPs$P, offset = 0.7, labs = topSNPs$SNP, cex = 0.8, ...)
+            } else {
+                textxy(topSNPs$pos, topSNPs$P, offset = 0.7, labs = topSNPs$SNP, cex = 0.8, ...)
+            }
         }
-    }  
+    }
     par(xpd = FALSE)
 }
