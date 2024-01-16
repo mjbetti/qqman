@@ -205,17 +205,17 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
     if (genomewideline) abline(h=genomewideline, col="red")
     
     # Highlight snps from the first character vector
-  if (!is.null(highlight)) {
+    if (!is.null(highlight)) {
     if (any(!(highlight %in% d$SNP))) warning("You're trying to highlight SNPs that don't exist in your results.")
     d.highlight = d[which(d$SNP %in% highlight), ]
     with(d.highlight, points(pos, logp, col=highlightColor, pch=20, ...)) 
   }
 
-  # Highlight snps from the second character vector
-  if (!is.null(highlight2)) {
-    if (any(!(highlight2 %in% d$SNP))) warning("You're trying to highlight SNPs that don't exist in your results.")
-    d.highlight2 = d[which(d$SNP %in% highlight2), ]
-    with(d.highlight2, points(pos, logp, col=highlightColor2, pch=20, ...)) 
+   # Highlight snps from the second character vector
+   if (!is.null(highlight2)) {
+   if (any(!(highlight2 %in% d$SNP))) warning("You're trying to highlight SNPs that don't exist in your results.")
+   d.highlight2 = d[which(d$SNP %in% highlight2), ]
+   with(d.highlight2, points(pos, logp, col=highlightColor2, pch=20, ...)) 
   }
     
     # Highlight top SNPs
