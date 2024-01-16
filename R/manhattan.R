@@ -48,7 +48,7 @@
 manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP", 
                       col=c("gray10", "gray60"), chrlabs=NULL,
                       suggestiveline=-log10(1e-5), genomewideline=-log10(5e-8), 
-                      highlight=NULL, logp=TRUE, annotatePval = NULL, annotateTop = TRUE, highlightColor = 'green3', ...) {
+                      highlight=NULL, highlight2=NULL, logp=TRUE, annotatePval = NULL, annotateTop = TRUE, highlightColor = 'green3', highlightColor2='red3', ...) {
 
     # Not sure why, but package check will warn without this.
     CHR=BP=P=index=NULL
@@ -204,12 +204,19 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
     if (suggestiveline) abline(h=suggestiveline, col="blue")
     if (genomewideline) abline(h=genomewideline, col="red")
     
-    # Highlight snps from a character vector
-    if (!is.null(highlight)) {
-        if (any(!(highlight %in% d$SNP))) warning("You're trying to highlight SNPs that don't exist in your results.")
-        d.highlight=d[which(d$SNP %in% highlight), ]
-        with(d.highlight, points(pos, logp, col=highlightColor, pch=20, ...)) 
-    }
+    # Highlight snps from the first character vector
+  if (!is.null(highlight)) {
+    if (any(!(highlight %in% d$SNP))) warning("You're trying to highlight SNPs that don't exist in your results.")
+    d.highlight = d[which(d$SNP %in% highlight), ]
+    with(d.highlight, points(pos, logp, col=highlightColor, pch=20, ...)) 
+  }
+
+  # Highlight snps from the second character vector
+  if (!is.null(highlight2)) {
+    if (any(!(highlight2 %in% d$SNP))) warning("You're trying to highlight SNPs that don't exist in your results.")
+    d.highlight2 = d[which(d$SNP %in% highlight2), ]
+    with(d.highlight2, points(pos, logp, col=highlightColor2, pch=20, ...)) 
+  }
     
     # Highlight top SNPs
     if (!is.null(annotatePval)) {
