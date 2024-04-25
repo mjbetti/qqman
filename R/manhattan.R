@@ -235,9 +235,9 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
         # annotate these SNPs
         if (annotateTop == FALSE) {
             if (logp) {
-                with(topHits, textxy(pos, -log10(P), offset = 0.7, labs = SNP, cex = 0.8, ...))
+                with(topHits, textxy(pos, -log10(P), offset = 0.7, labs = SNP, cex = 1.0, ...))
             } else {
-                with(topHits, textxy(pos, P, offset = 0.7, labs = SNP, cex = 0.8, ...))
+                with(topHits, textxy(pos, P, offset = 0.7, labs = SNP, cex = 1.0, ...))
             }
         }
         else {
@@ -248,9 +248,9 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
                 topSNPs <- rbind(topSNPs, chrSNPs[1,])
             }
             if (logp) {
-                textxy(topSNPs$pos, -log10(topSNPs$P), offset = 0.7, labs = topSNPs$SNP, cex = 0.8, ...)
+                textxy(topSNPs$pos, -log10(topSNPs$P), offset = 0.7, labs = topSNPs$SNP, cex = 1.0, ...)
             } else {
-                textxy(topSNPs$pos, topSNPs$P, offset = 0.7, labs = topSNPs$SNP, cex = 0.8, ...)
+                textxy(topSNPs$pos, topSNPs$P, offset = 0.7, labs = topSNPs$SNP, cex = 1.0, ...)
             }
         }
     }
